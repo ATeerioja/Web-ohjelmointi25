@@ -11,23 +11,32 @@ const Statistics = (props) => {
   const average = (props.good * 1 +props.bad * -1) / total
   const positive = total - (props.bad + props.neutral)
 
+  if (total > 0) {
+    return (
+      <div>
+        <p>good {props.good}</p>
+        <p>neutral {props.neutral}</p>
+        <p>bad {props.bad}</p>
+        <p>all {total}</p>
+        <p>average {average}</p>
+        <p>positive {((positive/total)*100)}%</p>
+      </div>
+    )
+  }
+
   return (
     <div>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {total}</p>
-      <p>average {average}</p>
-      <p>positive {((positive/total)*100)}%</p>
+      <p>No feedback given</p>
     </div>
   )
+
 }
 
 const App = () => {
   // tallenna napit omaan tilaansa
-  const [good, setGood] = useState(6)
-  const [neutral, setNeutral] = useState(2)
-  const [bad, setBad] = useState(1)
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
 
   return (
     <div>
