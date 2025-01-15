@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+import FilterPersons from './components/FilterPersons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -10,24 +13,6 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
-
-
-  const addPerson = (event) => {
-    event.preventDefault()
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-
-    if (persons.some(person => person.name === personObject.name)) {
-      alert(`${newName} is already added to Phonebook`)
-    } if (persons.some(person => person.number === personObject.number)) {
-      alert(`${newNumber} is already added to Phonebook`)
-    } else {
-      setPersons(persons.concat(personObject))
-      setNewName('')
-    }
-  }
 
   const handlePersonChange = (event) => {
     setNewName(event.target.value)
@@ -44,37 +29,27 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-        <div>
-          filter shown with <input
-          value={filter}
-          onChange={handleFilterChange}
-        />
-        </div>
+      <FilterPersons 
+        filter={filter}
+        handleFilterChange={handleFilterChange}
 
-      <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input
-          value={newName}
-          onChange={handlePersonChange}
-          />
-          <br></br>
-          number: <input 
-          value={newNumber}
-          onChange={handleNumberChange}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-        <div>
-          {persons.filter((person) => 
-            person.name.toUpperCase().includes(filter.toUpperCase())).map((person) => 
-            <p>{person.name} {person.number}</p>
-          )}
-        </div>
+      />
+
+      <h3>Add a new</h3>
+      <PersonForm 
+        newName={newName}
+        handlePersonChange={handlePersonChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
+        setPersons={setPersons}
+        persons={persons}
+        setNewName={setNewName}
+        setNewNumber={setNewNumber}
+      />
+
+      <h3>Numbers</h3>
+      <Persons persons={persons} filter={filter}/>
+
     </div>
   )
 
