@@ -1,11 +1,16 @@
-const Persons = ({persons, filter}) => {
+import deleteHandler from "./deleteHandler"
+
+const Persons = ({persons, filter, setPersons}) => {
+
   return (
     <div>
     {persons.filter((person) => 
     person.name.toUpperCase().includes(filter.toUpperCase())).map((person) => 
-    <p key={person.name}>{person.name} {person.number}</p>
-  )}
-    </div>
-)}
+    <p key={person.id}>{person.name} {person.number} <button onClick={() => deleteHandler(person.id, setPersons)}>delete</button></p>
+    )}      
+   </div>
+  )} 
+
+  
 
 export default Persons

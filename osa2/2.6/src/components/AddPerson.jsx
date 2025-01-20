@@ -1,4 +1,4 @@
-import axios from "axios"
+import personService from "../services/persons.js"
 
 const AddPerson = (newName, newNumber, setNewNumber, setPersons, setNewName, persons) => {
 
@@ -12,10 +12,10 @@ const AddPerson = (newName, newNumber, setNewNumber, setPersons, setNewName, per
   } else if (persons.some(person => person.number === personObject.number)) {
     alert(`${newNumber} is already added to Phonebook`)
   } else {
-    axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+    personService
+      .create(personObject)
+      .then(initialPerson => {
+        setPersons(persons.concat(initialPerson))
         setNewName('')
         setNewNumber('')
       })
