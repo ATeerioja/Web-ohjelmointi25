@@ -1,12 +1,15 @@
 import personService from '../services/persons.js'
-import Persons from './Persons.jsx'
 
 
-const deleteHandler = (event, setPersons) => {
+const deleteHandler = (event, setPersons, setErrorMessage, name) => {
+
 
   personService
     .destroy(event)
     .then(() => {
+      setErrorMessage(`Deleted ${name}`)
+      setTimeout(() => {setErrorMessage(null)}, 5000)
+      
       personService
         .getAll()
         .then(initialPersons => {

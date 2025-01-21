@@ -1,10 +1,10 @@
 import AddPerson from "./AddPerson"
 
-const PersonForm = ({setNewNumber ,persons, newName, handlePersonChange, newNumber, handleNumberChange, setPersons, setNewName}) => {
+const PersonForm = ({setNewNumber ,persons, newName, handlePersonChange, newNumber, handleNumberChange, setPersons, setNewName, setErrorMessage}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    AddPerson(newName, newNumber,setNewNumber, setPersons, setNewName, persons)
+    AddPerson(newName, newNumber,setNewNumber, setPersons, setNewName, persons, setErrorMessage)
   }
 
   return (
